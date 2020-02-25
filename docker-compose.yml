@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+  db:
+    build: ./db
+    container_name: greatname-backend_db
+    image: postgres:9.6.17-alpine
+    restart: always
+    volumes:
+      - ./db/sql:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    environment:
+        POSTGRES_USER: root
+        POSTGRES_PASSWORD: root
+        POSTGRES_DB: greatname-db
+
+  adminer:
+    image: dockette/adminer:dg
+    restart: always
+    ports:
+      - "8090:80"
+    environment:
+      ADMINER_DEFAULT_DB_DRIVER: mysql
+      ADMINER_DEFAULT_DB_HOST: greatname-db
