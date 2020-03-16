@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>greatname-backend</artifactId>
+        <groupId>ch.hsr</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>persistence</artifactId>
+
+    <profiles>
+        <profile>
+            <id>LOCAL_bank_db</id>
+            <properties>
+                <db.username.flyway>root</db.username.flyway>
+                <db.password.flyway>root</db.password.flyway>
+                <db.ip.flyway>localhost</db.ip.flyway>
+                <db.port.flyway>4100</db.port.flyway>
+                <db.name.flyway>vss_greatnamedb</db.name.flyway>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <configuration>
+                    <driver>org.postgresql.Driver</driver>
+                    <url>jdbc:postgresql://${db.ip.flyway}:${db.port.flyway}/${db.name.flyway}</url>
+                    <user>${db.username.flyway}</user>
+                    <password>${db.password.flyway}</password>
+                    <locations>filesystem:src/main/skripts/postgres/sql/migration</locations>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
