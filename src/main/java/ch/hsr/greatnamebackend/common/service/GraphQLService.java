@@ -25,10 +25,13 @@ public class GraphQLService {
 
     private GraphQL graphQL;
 
-    @Autowired
-    private AllSurveysDataFetcher allSurveysDataFetcher;
-    @Autowired
-    private SurveyDataFetcher surveyDataFetcher;
+    private final AllSurveysDataFetcher allSurveysDataFetcher;
+    private final SurveyDataFetcher surveyDataFetcher;
+
+    public GraphQLService(AllSurveysDataFetcher allSurveysDataFetcher, SurveyDataFetcher surveyDataFetcher) {
+        this.allSurveysDataFetcher = allSurveysDataFetcher;
+        this.surveyDataFetcher = surveyDataFetcher;
+    }
 
     @PostConstruct
     private void loadSchema() throws IOException {
