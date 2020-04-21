@@ -28,7 +28,7 @@ public class SecurityOAuthConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(patternify("/sample")).permitAll()
+                .antMatchers(patternify("/survey")).permitAll()
                 .anyRequest().authenticated()
                 .and().logout()
                 .logoutUrl("/logout");
