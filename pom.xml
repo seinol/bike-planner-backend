@@ -2,11 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
-    <modules>
-        <module>persistence</module>
-    </modules>
-    <parent>
+	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.4.RELEASE</version>
@@ -39,7 +35,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>com.graphql-java</groupId>
 			<artifactId>graphql-java-tools</artifactId>
@@ -50,7 +45,6 @@
 			<artifactId>graphiql-spring-boot-starter</artifactId>
 			<version>5.0.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -90,7 +84,30 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<configuration>
+					<driver>org.postgresql.Driver</driver>
+					<url>jdbc:postgresql://${db.ip.flyway}:${db.port.flyway}/${db.name.flyway}</url>
+					<user>${db.username.flyway}</user>
+					<password>${db.password.flyway}</password>
+					<locations>filesystem:src/main/resources/skripts/postgres/sql/migration</locations>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>LOCAL_greatname_db</id>
+			<properties>
+				<db.username.flyway>root</db.username.flyway>
+				<db.password.flyway>root</db.password.flyway>
+				<db.ip.flyway>localhost</db.ip.flyway>
+				<db.port.flyway>4100</db.port.flyway>
+				<db.name.flyway>greatnamedb</db.name.flyway>
+			</properties>
+		</profile>
+	</profiles>
 </project>
