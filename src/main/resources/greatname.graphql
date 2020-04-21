@@ -1,0 +1,16 @@
+schema {
+    query: Query
+}
+
+type Query {
+    allSurveys: [Survey]
+    survey(id: ID) : Survey
+}
+
+type Survey {
+    id: ID
+    name: String
+    creationDate: String
+    finishBy: String
+    area: String
+}

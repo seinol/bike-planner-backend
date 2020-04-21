@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+  db:
+    container_name: greatname-backend_db
+    restart: always
+    ports:
+      - "4100:5432"
+    image: postgres:9.6.17-alpine
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: greatnamedb
+
+  adminer:
+    image: dockette/adminer:dg
+    restart: always
+    ports:
+      - "8095:80"
+    environment:
+      ADMINER_DEFAULT_DB_DRIVER: postgresql
+      ADMINER_DEFAULT_DB_HOST: greatnamedb
