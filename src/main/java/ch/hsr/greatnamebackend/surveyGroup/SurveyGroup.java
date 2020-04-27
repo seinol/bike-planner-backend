@@ -3,12 +3,18 @@ package ch.hsr.greatnamebackend.surveyGroup;
 import ch.hsr.greatnamebackend.answerGroup.AnswerGroup;
 import ch.hsr.greatnamebackend.survey.Survey;
 import ch.hsr.greatnamebackend.surveyElement.SurveyElement;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Table(name = "survey_group")
 public class SurveyGroup {
     @Id

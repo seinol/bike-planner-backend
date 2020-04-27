@@ -3,14 +3,22 @@ package ch.hsr.greatnamebackend.answer;
 import ch.hsr.greatnamebackend.person.Person;
 import ch.hsr.greatnamebackend.survey.Survey;
 import ch.hsr.greatnamebackend.surveyElement.SurveyElement;
+import io.leangen.graphql.annotations.GraphQLQuery;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Table(name = "answer")
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GraphQLQuery(name = "id", description = "A answers's id")
     private Integer id;
 
     @ManyToOne
@@ -26,5 +34,6 @@ public class Answer {
     private SurveyElement surveyElement;
 
     @Column(name = "selected_answer")
+    @GraphQLQuery(name = "selectedAnswer", description = "selected answer")
     private String selectedAnswer;
 }

@@ -2,10 +2,8 @@ package ch.hsr.greatnamebackend.survey;
 
 import ch.hsr.greatnamebackend.answer.Answer;
 import ch.hsr.greatnamebackend.surveyGroup.SurveyGroup;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import io.leangen.graphql.annotations.GraphQLQuery;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,10 +14,14 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Table(name = "survey")
 public class Survey {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GraphQLQuery(name = "id", description = "A survey's id")
     private Integer id;
 
     @OneToMany(mappedBy = "survey")
@@ -28,6 +30,7 @@ public class Survey {
     @OneToMany(mappedBy = "answerGroup")
     private Collection<SurveyGroup> surveyGroups = new ArrayList<>();
 
+    @GraphQLQuery(name = "name", description = "A survey's name")
     private String name;
 
     @Column(name = "creationdate", nullable = false)
