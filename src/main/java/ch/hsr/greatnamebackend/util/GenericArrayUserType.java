@@ -1,3 +1,7 @@
+/**
+ * Sourcecode from: https://stackoverflow.com/questions/39119164/how-to-use-spring-data-jpa-to-insert-into-a-postgres-array-type-column
+ */
+
 package ch.hsr.greatnamebackend.util;
 
 import org.hibernate.HibernateException;

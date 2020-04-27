@@ -1,5 +1,6 @@
 package ch.hsr.greatnamebackend.answer;
 
+import ch.hsr.greatnamebackend.answerGroup.AnswerPossibility;
 import ch.hsr.greatnamebackend.person.Person;
 import ch.hsr.greatnamebackend.survey.Survey;
 import ch.hsr.greatnamebackend.surveyElement.SurveyElement;
@@ -18,7 +19,6 @@ import javax.persistence.*;
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GraphQLQuery(name = "id", description = "A answers's id")
     private Integer id;
 
     @ManyToOne
@@ -34,6 +34,5 @@ public class Answer {
     private SurveyElement surveyElement;
 
     @Column(name = "selected_answer")
-    @GraphQLQuery(name = "selectedAnswer", description = "selected answer")
     private String selectedAnswer;
 }

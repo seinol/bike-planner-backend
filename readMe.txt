@@ -1,5 +1,7 @@
 Setup Local:
     execute docker-compose.yml
+        PostgresDB: localhost:4100/greatnamedb
+        Adminer: localhost:8095
 
     create Maven-Configuration:
         Command line: flyway:migrate
