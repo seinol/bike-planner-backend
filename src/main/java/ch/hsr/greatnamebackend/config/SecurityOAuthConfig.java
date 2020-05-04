@@ -30,7 +30,6 @@ public class SecurityOAuthConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(patternify("/graphql")).permitAll()
                 .antMatchers(patternify("/graphiql")).permitAll()
-                .antMatchers(patternify("/graphigl/index.html")).permitAll()
                 .anyRequest().authenticated()
                 .and().logout()
                 .logoutUrl("/logout");

@@ -52,7 +52,7 @@ create table answer (
     survey_id integer,
     survey_element_id integer,
     person_id integer,
-    selected_answer answer_type,
+    selected_answer smallint,
     primary key (id)
 );
 

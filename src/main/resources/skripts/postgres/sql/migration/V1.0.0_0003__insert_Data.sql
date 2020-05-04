@@ -25,7 +25,7 @@ insert into survey_date_element (id, survey_element_id, date) values
 
 
 insert into answer (id, survey_id, survey_element_id, person_id, selected_answer) values
-('1', '1','1', '1', 'YES'),
-('2', '1','2', '1', 'NO'),
-('3', '1','3', '1', 'YES');
+('1', '1','1', '1', 0),
+('2', '1','2', '1', 1),
+('3', '1','3', '1', 0);
 

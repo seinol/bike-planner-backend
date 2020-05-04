@@ -33,6 +33,7 @@ public class Answer {
     @JoinColumn(name = "survey_element_id")
     private SurveyElement surveyElement;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "selected_answer")
-    private String selectedAnswer;
+    private AnswerPossibility selectedAnswer;
 }
