@@ -13,7 +13,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode
 @Table(name = "survey_date_element")
 @DiscriminatorValue("DATE")
 public class SurveyDateElement extends SurveyElement {

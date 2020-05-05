@@ -18,6 +18,7 @@ import java.util.Map;
 public class GraphQLGreatnameController {
 
     private final GraphQL graphQL;
+    private final String graphQLEndpoint = "/graphql";
 
     public GraphQLGreatnameController(SurveyService surveyService) {
         GraphQLSchema schema = new GraphQLSchemaGenerator()
@@ -30,7 +31,7 @@ public class GraphQLGreatnameController {
         graphQL = GraphQL.newGraphQL(schema).build();
     }
 
-    @PostMapping(value = "/graphql", consumes = MediaType.ALL_VALUE, produces = MediaType.ALL_VALUE)
+    @PostMapping(value = graphQLEndpoint, consumes = MediaType.ALL_VALUE, produces = MediaType.ALL_VALUE)
     @ResponseBody
     public Map<String, Object> graphql(@RequestBody Map<String, String> request, HttpServletRequest raw) {
         ExecutionResult executionResult = graphQL.execute(

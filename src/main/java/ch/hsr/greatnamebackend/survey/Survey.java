@@ -6,9 +6,9 @@ import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 @Entity
 @Data
@@ -34,10 +34,10 @@ public class Survey {
     private String name;
 
     @Column(name = "creationdate", nullable = false)
-    private Date creationDate;
+    private LocalDateTime creationDate;
 
     @Column(name = "finishby")
-    private Date finishBy;
+    private LocalDateTime finishBy;
 
     private String area;
 }
