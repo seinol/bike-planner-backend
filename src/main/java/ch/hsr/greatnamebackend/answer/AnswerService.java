@@ -2,7 +2,6 @@ package ch.hsr.greatnamebackend.answer;
 
 import ch.hsr.greatnamebackend.survey.Survey;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
 @Service
 public class AnswerService {
 
-    @Autowired
     private final AnswerRepository answerRepository;
 
     public AnswerService(AnswerRepository answerRepository) {
