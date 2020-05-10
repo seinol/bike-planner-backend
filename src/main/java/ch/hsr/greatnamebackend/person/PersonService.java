@@ -19,4 +19,8 @@ public class PersonService {
     public List<Person> getSurveyParticipants(Survey survey) {
         return personRepository.getAllByAnswersContains(survey);
     }
+
+    public Person savePerson(Person person) {
+        return personRepository.save(person);
+    }
 }

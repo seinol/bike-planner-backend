@@ -4,7 +4,7 @@ insert into person values
 ('1', 'Scheiwiller', 'Christoph', 'christoph.scheiwiller@hsr.ch');
 
 insert into survey values
-('1', 'Sommer Tour', '2020-03-11 07:29:25', '2020-05-01 00:00:00 ' , 'Zentralschweiz');
+('1', 'Sommer Tour', '2020-03-11 07:29:25', '2020-05-01 00:00:00 ' , 'Zentralschweiz', 'b3761826a5357e9bb8464f46d88ebb72f5ef4e31420f5b403dba571968b3bfb2');
 
 insert into answer_group (id, description, answer_possibilities) values
 ('1', 'YesNoOption', '{"YES", "NO"}');

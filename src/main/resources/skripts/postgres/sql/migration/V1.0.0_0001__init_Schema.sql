@@ -7,6 +7,7 @@ create table survey (
     creationDate timestamp,
     finishBy timestamp,
     area text,
+    url_hash text,
     primary key (id)
 );
 

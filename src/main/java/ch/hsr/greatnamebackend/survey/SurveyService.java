@@ -20,12 +20,10 @@ import java.util.Optional;
 public class SurveyService {
 
     private final SurveyRepository surveyRepository;
-    private final AnswerService answerService;
     private final PersonService personService;
 
-    public SurveyService(SurveyRepository surveyRepository, AnswerService answerService, PersonService personService) {
+    public SurveyService(SurveyRepository surveyRepository, PersonService personService) {
         this.surveyRepository = surveyRepository;
-        this.answerService = answerService;
         this.personService = personService;
     }
 
@@ -39,14 +37,21 @@ public class SurveyService {
         return surveyRepository.findById(id);
     }
 
+    @GraphQLQuery(name = "surveyByUrlHash")
+    public Optional<Survey> getSurveyByUrlHash(@GraphQLArgument(name = "urlHash") String urlHash) {
+        return surveyRepository.findFirstByUrlHash(urlHash);
+    }
+
     @GraphQLQuery(name = "participants")
     public List<Person> getParticipants(@GraphQLContext Survey survey) {
         return personService.getSurveyParticipants(survey);
     }
 
+    /*
     @GraphQLMutation(name = "saveSurvey")
     public Survey saveSurvey(@GraphQLArgument(name = "survey") Survey survey) {
         survey.setCreationDate(LocalDateTime.now());
         return surveyRepository.save(survey);
     }
+     */
 }

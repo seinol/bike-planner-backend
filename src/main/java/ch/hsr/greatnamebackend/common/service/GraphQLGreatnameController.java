@@ -5,14 +5,19 @@ import graphql.ExecutionInput;
 import graphql.ExecutionResult;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
+import io.leangen.geantyref.GenericTypeReflector;
 import io.leangen.graphql.GraphQLSchemaGenerator;
+import io.leangen.graphql.annotations.types.GraphQLInterface;
+import io.leangen.graphql.generator.mapping.strategy.InterfaceMappingStrategy;
 import io.leangen.graphql.metadata.strategy.query.AnnotatedResolverBuilder;
 import io.leangen.graphql.metadata.strategy.value.jackson.JacksonValueMapperFactory;
+import io.leangen.graphql.util.ClassUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
+import java.lang.reflect.AnnotatedType;
+import java.util.*;
 
 @RestController
 public class GraphQLGreatnameController {
@@ -22,6 +27,29 @@ public class GraphQLGreatnameController {
 
     public GraphQLGreatnameController(SurveyService surveyService) {
         GraphQLSchema schema = new GraphQLSchemaGenerator()
+                .withInterfaceMappingStrategy(new InterfaceMappingStrategy() {
+                    @Override
+                    public boolean supports(AnnotatedType interfase) {
+                        return interfase.isAnnotationPresent(GraphQLInterface.class);
+                    }
+
+                    @Override
+                    public Collection<AnnotatedType> getInterfaces(AnnotatedType type) {
+                        Class cls = ClassUtils.getRawType(type.getType());
+                        Set<AnnotatedType> interfaces = new HashSet<>();
+                        do {
+                            AnnotatedType currentType = GenericTypeReflector.getExactSuperType(type, cls);
+                            if (supports(currentType)) {
+                                interfaces.add(currentType);
+                            }
+                            Arrays.stream(cls.getInterfaces())
+                                    .map(inter -> GenericTypeReflector.getExactSubType(type, inter))
+                                    .filter(this::supports)
+                                    .forEach(interfaces::add);
+                        } while ((cls = cls.getSuperclass()) != Object.class && cls != null);
+                        return interfaces;
+                    }
+                })
                 .withResolverBuilders(
                         new AnnotatedResolverBuilder())
                 .withOperationsFromSingleton(surveyService)
