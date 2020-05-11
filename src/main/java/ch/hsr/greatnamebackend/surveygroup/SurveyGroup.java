@@ -1,8 +1,8 @@
-package ch.hsr.greatnamebackend.surveyGroup;
+package ch.hsr.greatnamebackend.surveygroup;
 
-import ch.hsr.greatnamebackend.answerGroup.AnswerGroup;
+import ch.hsr.greatnamebackend.answergroup.AnswerGroup;
 import ch.hsr.greatnamebackend.survey.Survey;
-import ch.hsr.greatnamebackend.surveyElement.SurveyElement;
+import ch.hsr.greatnamebackend.surveyelement.SurveyElement;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,6 +17,7 @@ import java.util.Collection;
 @EqualsAndHashCode
 @Table(name = "survey_group")
 public class SurveyGroup {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

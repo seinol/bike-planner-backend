@@ -1,7 +1,7 @@
 package ch.hsr.greatnamebackend.survey;
 
 import ch.hsr.greatnamebackend.answer.Answer;
-import ch.hsr.greatnamebackend.surveyGroup.SurveyGroup;
+import ch.hsr.greatnamebackend.surveygroup.SurveyGroup;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.*;
 

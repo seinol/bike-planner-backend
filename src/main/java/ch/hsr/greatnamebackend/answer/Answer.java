@@ -1,10 +1,9 @@
 package ch.hsr.greatnamebackend.answer;
 
-import ch.hsr.greatnamebackend.answerGroup.AnswerPossibility;
+import ch.hsr.greatnamebackend.answergroup.AnswerPossibility;
 import ch.hsr.greatnamebackend.person.Person;
 import ch.hsr.greatnamebackend.survey.Survey;
-import ch.hsr.greatnamebackend.surveyElement.SurveyElement;
-import io.leangen.graphql.annotations.GraphQLQuery;
+import ch.hsr.greatnamebackend.surveyelement.SurveyElement;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,6 +16,7 @@ import javax.persistence.*;
 @EqualsAndHashCode
 @Table(name = "answer")
 public class Answer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -36,4 +36,5 @@ public class Answer {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "selected_answer")
     private AnswerPossibility selectedAnswer;
+
 }

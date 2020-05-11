@@ -1,12 +1,12 @@
 package ch.hsr.greatnamebackend.answer;
 
-import ch.hsr.greatnamebackend.answerGroup.AnswerPossibility;
+import ch.hsr.greatnamebackend.answergroup.AnswerPossibility;
 import ch.hsr.greatnamebackend.person.Person;
 import ch.hsr.greatnamebackend.person.PersonService;
 import ch.hsr.greatnamebackend.survey.Survey;
 import ch.hsr.greatnamebackend.survey.SurveyService;
-import ch.hsr.greatnamebackend.surveyElement.SurveyElement;
-import ch.hsr.greatnamebackend.surveyElement.SurveyElementService;
+import ch.hsr.greatnamebackend.surveyelement.SurveyElement;
+import ch.hsr.greatnamebackend.surveyelement.SurveyElementService;
 import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;

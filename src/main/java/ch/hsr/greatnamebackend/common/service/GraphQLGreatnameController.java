@@ -29,8 +29,8 @@ public class GraphQLGreatnameController {
         GraphQLSchema schema = new GraphQLSchemaGenerator()
                 .withInterfaceMappingStrategy(new InterfaceMappingStrategy() {
                     @Override
-                    public boolean supports(AnnotatedType interfase) {
-                        return interfase.isAnnotationPresent(GraphQLInterface.class);
+                    public boolean supports(AnnotatedType annotatedType) {
+                        return annotatedType.isAnnotationPresent(GraphQLInterface.class);
                     }
 
                     @Override

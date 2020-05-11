@@ -1,4 +1,4 @@
-package ch.hsr.greatnamebackend.surveyElement;
+package ch.hsr.greatnamebackend.surveyelement;
 
 import org.springframework.stereotype.Service;
 
@@ -13,8 +13,8 @@ public class SurveyElementService {
         this.surveyElementRepository = surveyElementRepository;
     }
 
-
-    public Optional<SurveyElement> getSurveyElementById(int surveElementId) {
-        return surveyElementRepository.findById(surveElementId);
+    public Optional<SurveyElement> getSurveyElementById(int surveyElementId) {
+        return surveyElementRepository.findById(surveyElementId);
     }
+
 }

@@ -1,8 +1,8 @@
-package ch.hsr.greatnamebackend.surveyElement.dateElement;
+package ch.hsr.greatnamebackend.surveyelement.dateelement;
 
 import ch.hsr.greatnamebackend.answer.Answer;
-import ch.hsr.greatnamebackend.surveyElement.SurveyElement;
-import ch.hsr.greatnamebackend.surveyGroup.SurveyGroup;
+import ch.hsr.greatnamebackend.surveyelement.SurveyElement;
+import ch.hsr.greatnamebackend.surveygroup.SurveyGroup;
 import lombok.*;
 
 import javax.persistence.*;

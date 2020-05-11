@@ -13,4 +13,5 @@ public class ApplicationWebConfig implements WebMvcConfigurer {
                 "forward:/static/graphigl/index.html"
         );
     }
+
 }

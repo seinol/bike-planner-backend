@@ -38,4 +38,5 @@ public class Person {
 
     @Column(name = "mail")
     private String mail;
+
 }

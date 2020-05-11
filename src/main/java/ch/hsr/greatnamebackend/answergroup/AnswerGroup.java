@@ -1,4 +1,4 @@
-package ch.hsr.greatnamebackend.answerGroup;
+package ch.hsr.greatnamebackend.answergroup;
 
 import com.vladmihalcea.hibernate.type.array.EnumArrayType;
 import lombok.*;
@@ -26,6 +26,7 @@ import javax.persistence.*;
 )
 @Table(name = "answer_group")
 public class AnswerGroup {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -36,4 +37,5 @@ public class AnswerGroup {
     @Type(type = "pgsql_enum_array")
     @Column(name = "answer_possibilities", columnDefinition = "answer_possibilities[]")
     private AnswerPossibility[] answerPossibilities;
+
 }

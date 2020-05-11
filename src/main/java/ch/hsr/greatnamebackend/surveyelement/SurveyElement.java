@@ -1,7 +1,7 @@
-package ch.hsr.greatnamebackend.surveyElement;
+package ch.hsr.greatnamebackend.surveyelement;
 
 import ch.hsr.greatnamebackend.answer.Answer;
-import ch.hsr.greatnamebackend.surveyGroup.SurveyGroup;
+import ch.hsr.greatnamebackend.surveygroup.SurveyGroup;
 import io.leangen.graphql.annotations.types.GraphQLInterface;
 import lombok.*;
 
@@ -20,6 +20,7 @@ import java.util.Collection;
 @DiscriminatorColumn(name = "type")
 @GraphQLInterface(name = "SurveyElement", implementationAutoDiscovery = true)
 public abstract class SurveyElement {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -36,4 +37,5 @@ public abstract class SurveyElement {
 
     @Column(name = "type")
     private String type;
+
 }

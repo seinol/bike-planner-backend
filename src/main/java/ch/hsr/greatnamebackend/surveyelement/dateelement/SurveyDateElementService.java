@@ -1,6 +1,5 @@
-package ch.hsr.greatnamebackend.surveyElement.dateElement;
+package ch.hsr.greatnamebackend.surveyelement.dateelement;
 
-import ch.hsr.greatnamebackend.surveyElement.SurveyElement;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import org.springframework.stereotype.Service;

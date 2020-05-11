@@ -1,17 +1,13 @@
 package ch.hsr.greatnamebackend.survey;
 
-import ch.hsr.greatnamebackend.answer.Answer;
-import ch.hsr.greatnamebackend.answer.AnswerService;
 import ch.hsr.greatnamebackend.person.Person;
 import ch.hsr.greatnamebackend.person.PersonService;
 import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLContext;
-import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 

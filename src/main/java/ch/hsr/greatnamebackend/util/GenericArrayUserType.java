@@ -1,7 +1,3 @@
-/**
- * Sourcecode from: https://stackoverflow.com/questions/39119164/how-to-use-spring-data-jpa-to-insert-into-a-postgres-array-type-column
- */
-
 package ch.hsr.greatnamebackend.util;
 
 import org.hibernate.HibernateException;
@@ -12,6 +8,7 @@ import java.io.Serializable;
 import java.sql.*;
 
 public class GenericArrayUserType<T extends Serializable> implements UserType {
+
     protected static final int[] SQL_TYPES = {Types.ARRAY};
     private Class<T> typeParameterClass;
 
@@ -46,7 +43,9 @@ public class GenericArrayUserType<T extends Serializable> implements UserType {
     }
 
     @Override
-    public Object nullSafeGet(ResultSet resultSet, String[] names, SharedSessionContractImplementor sharedSessionContractImplementor, Object o) throws HibernateException, SQLException {
+    public Object nullSafeGet(ResultSet resultSet, String[] names,
+                              SharedSessionContractImplementor sharedSessionContractImplementor, Object o)
+            throws HibernateException, SQLException {
         if (resultSet.wasNull()) {
             return null;
         }
@@ -61,7 +60,9 @@ public class GenericArrayUserType<T extends Serializable> implements UserType {
     }
 
     @Override
-    public void nullSafeSet(PreparedStatement statement, Object value, int index, SharedSessionContractImplementor sharedSessionContractImplementor) throws HibernateException, SQLException {
+    public void nullSafeSet(PreparedStatement statement, Object value, int index,
+                            SharedSessionContractImplementor sharedSessionContractImplementor)
+            throws HibernateException, SQLException {
         Connection connection = statement.getConnection();
         if (value == null) {
             statement.setNull(index, SQL_TYPES[0]);
@@ -92,4 +93,5 @@ public class GenericArrayUserType<T extends Serializable> implements UserType {
     public int[] sqlTypes() {
         return new int[]{Types.ARRAY};
     }
+
 }
