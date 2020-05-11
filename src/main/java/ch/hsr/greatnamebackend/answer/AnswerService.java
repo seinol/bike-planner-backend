@@ -1,5 +1,6 @@
 package ch.hsr.greatnamebackend.answer;
 
+import ch.hsr.greatnamebackend.answerGroup.AnswerPossibility;
 import ch.hsr.greatnamebackend.person.Person;
 import ch.hsr.greatnamebackend.person.PersonService;
 import ch.hsr.greatnamebackend.survey.Survey;
@@ -47,7 +48,7 @@ public class AnswerService {
             answer.setPerson(tmpPerson);
             surveyElement.ifPresent(answer::setSurveyElement);
             survey.ifPresent(answer::setSurvey);
-            answer.setSelectedAnswer(input.getSelectedAnswer());
+            answer.setSelectedAnswer(AnswerPossibility.valueOf(input.getSelectedAnswer()));
             entities.add(answer);
         }
         return answerRepository.saveAll(entities);

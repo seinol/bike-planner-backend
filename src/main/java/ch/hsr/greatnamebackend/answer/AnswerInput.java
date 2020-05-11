@@ -12,5 +12,5 @@ public class AnswerInput {
     @NotNull
     private int surveyElementId;
     @NotNull
-    private AnswerPossibility selectedAnswer;
+    private String selectedAnswer;
 }
