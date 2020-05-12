@@ -22,14 +22,14 @@ Postman: https://www.postman.com
 1.3 You will need a DNS (A or CNAME) record pointed to your server for Lets Encrypt certs to work. <br />
 
 2. Docker Setup: <br />
-2.1 Go to docker/docker-compose.yml and change example.com with your specific domain. <br />
-2.2 You may want to change the Basic Auth of the Traefik Dashboard (traefik.http.middlewares.traefik-auth.basicauth.users=) to your needs. Your setting has to be htpasswd compatible. For moreinformation please refer to the offical Traefik documentation. <br />
+2.1 Go to docker/docker-compose.yml and change all example.com entries to your specific domain name. <br />
+2.2 You should  change the basic auth of the Traefik dashboard (traefik.http.middlewares.traefik-auth.basicauth.users=) to your needs. The default user is admin and the default password is hsrvss!  Your setting has to be htpasswd compatible. For more information please refer to the offical Traefik documentation. https://docs.traefik.io/middlewares/basicauth/ <br />
 2.3 Execute docker-compose up -d to start the prepared Docker containers. <br />
 
 3. Setup the Databse: <br />
 3.1 Go back to the root directory of the repository. <br />
-3.2 execute mvn flyway:migrate. <br />
+3.2 execute mvn flyway:migrate . <br />
 
 4. Scale the Backend Service: <br />
 4.1 Go back to the docker directory. <br />
-4.2 Execute docker-compose scale backend=X. Replace X with the number of Replicas you need. Traefik will automatically loadbalance trafic between them afterwards.<br />
+4.2 Execute docker-compose scale backend=X . Replace X with the number of replicas you need. Traefik will automatically loadbalance trafic between them afterwards.<br />
