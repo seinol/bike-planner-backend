@@ -1,0 +1,86 @@
+ version: '3'
+
+ services:
+  traefik:
+    image: traefik:v2.2.1
+    container_name: traefik
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - proxy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./data/traefik.yml:/traefik.yml:ro
+      - ./data/acme.json:/acme.json
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.entrypoints=http"
+      - "traefik.http.routers.traefik.rule=Host(`example.com`)"
+      - "traefik.http.middlewares.traefik-auth.basicauth.users=admin:$$apr1$$1hkXzPD7$$Gz8dI6feQu5yhclhKXaRM."
+      - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
+      - "traefik.http.routers.traefik-secure.entrypoints=https"
+      - "traefik.http.routers.traefik-secure.rule=Host(`example.com`)"
+      - "traefik.http.routers.traefik-secure.middlewares=traefik-auth"
+      - "traefik.http.routers.traefik-secure.tls=true"
+      - "traefik.http.routers.traefik-secure.tls.certresolver=http"
+      - "traefik.http.routers.traefik-secure.service=api@internal"
+      
+  db:
+    container_name: greatname-backend_db
+    restart: always
+    networks: 
+      - proxy
+    ports:
+      - "4100:5432"
+      - "5432"
+    image: postgres:9.6.17-alpine
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: greatnamedb
+
+  adminer:
+    image: dockette/adminer:dg
+    restart: always
+    networks: 
+      - proxy
+    ports:
+      - "8095:80"
+    environment:
+      ADMINER_DEFAULT_DB_DRIVER: postgresql
+      ADMINER_DEFAULT_DB_HOST: greatnamedb
+
+  backend:
+    image: rafaelf98/hsrvss:backend
+    links:
+      - "db:database"
+    depends_on:
+      - adminer
+      - db
+    restart: always
+    networks: 
+      - proxy
+    ports: 
+      - "4110"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.entrypoints=http"
+      - "traefik.http.routers.backend.rule=Host(`backend.example.com`)"
+      - "traefik.http.middlewares.backend-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.backend.middlewares=backend-https-redirect"
+      - "traefik.http.routers.backend-secure.entrypoints=https"
+      - "traefik.http.routers.backend-secure.rule=Host(`backend.example.com`)"
+      - "traefik.http.routers.backend-secure.tls=true"
+      - "traefik.http.routers.backend-secure.tls.certresolver=http"
+      - "traefik.http.routers.backend-secure.service=backend-docker"
+      - "traefik.docker.network=proxy"
+      - "traefik.backends.backend.loadbalancer.stickiness"
+    
+ networks:
+  proxy:
