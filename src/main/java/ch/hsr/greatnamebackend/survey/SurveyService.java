@@ -42,12 +42,4 @@ public class SurveyService {
     public List<Person> getParticipants(@GraphQLContext Survey survey) {
         return personService.getSurveyParticipants(survey);
     }
-
-    /*
-    @GraphQLMutation(name = "saveSurvey")
-    public Survey saveSurvey(@GraphQLArgument(name = "survey") Survey survey) {
-        survey.setCreationDate(LocalDateTime.now());
-        return surveyRepository.save(survey);
-    }
-     */
 }

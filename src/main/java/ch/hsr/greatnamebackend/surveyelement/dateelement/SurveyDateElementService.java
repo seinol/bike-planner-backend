@@ -26,4 +26,5 @@ public class SurveyDateElementService {
     public Optional<SurveyDateElement> getDateElement(Integer id) {
         return surveyDateElementRepository.findById(id);
     }
+
 }

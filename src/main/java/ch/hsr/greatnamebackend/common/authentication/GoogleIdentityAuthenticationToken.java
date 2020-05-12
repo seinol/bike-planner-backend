@@ -40,4 +40,5 @@ public final class GoogleIdentityAuthenticationToken extends AbstractAuthenticat
             super.setAuthenticated(false);
         }
     }
+
 }

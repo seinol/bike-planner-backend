@@ -39,14 +39,10 @@ public class SecurityOAuthConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .addFilterBefore(new BearerTokenParserFilter(), BasicAuthenticationFilter.class)
                 .authorizeRequests()
-                //TODO implement authentication for endpoint
                 .antMatchers(patternify("/graphql")).authenticated()
-                //.antMatchers(patternify("/graphql")).permitAll()
-                .antMatchers(patternify("/graphiql")).permitAll()
+                .antMatchers(patternify("/graphiql")).authenticated()
                 .anyRequest().authenticated();
     }
-
-
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {

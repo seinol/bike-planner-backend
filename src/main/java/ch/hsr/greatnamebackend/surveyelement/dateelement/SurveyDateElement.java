@@ -19,6 +19,7 @@ import java.util.List;
 @Table(name = "survey_date_element")
 @DiscriminatorValue("DATE")
 public class SurveyDateElement extends SurveyElement {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -58,4 +59,5 @@ public class SurveyDateElement extends SurveyElement {
     public void setType(String type) {
         super.setType(type);
     }
+
 }

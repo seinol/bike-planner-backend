@@ -24,8 +24,6 @@ public final class BearerTokenParserFilter extends OncePerRequestFilter {
         String authorizationHeader = request.getHeader("Authorization");
 
         if (authorizationHeader != null && authorizationHeader.startsWith(TOKEN_PREFIX)) {
-            LOG.debug("Found bearer token on request {}", request);
-
             String token = parseAuthorizationToken(authorizationHeader);
             GoogleIdentityAuthenticationToken googleIdentityAuthenticationToken =
                     new GoogleIdentityAuthenticationToken(token);
@@ -39,4 +37,5 @@ public final class BearerTokenParserFilter extends OncePerRequestFilter {
     private String parseAuthorizationToken(String authorizationHeader) {
         return authorizationHeader.substring(TOKEN_PREFIX.length());
     }
+
 }

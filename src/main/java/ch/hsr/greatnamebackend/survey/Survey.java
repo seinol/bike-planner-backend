@@ -44,4 +44,5 @@ public class Survey {
     @Column(name = "url_hash")
     @GraphQLQuery(name = "urlHash", description = "A survey's unique urlHash to find survey with a unique link")
     private String urlHash;
+
 }
