@@ -116,9 +116,9 @@
 				<artifactId>flyway-maven-plugin</artifactId>
 				<configuration>
 					<driver>org.postgresql.Driver</driver>
-					<url>jdbc:postgresql://${db.ip.flyway}:${db.port.flyway}/${db.name.flyway}</url>
-					<user>${db.username.flyway}</user>
-					<password>${db.password.flyway}</password>
+					<url>jdbc:postgresql://localhost:4100/greatnamedb</url>
+					<user>root</user>
+					<password>root</password>
 					<locations>filesystem:src/main/resources/skripts/postgres/sql/migration</locations>
 				</configuration>
 			</plugin>
