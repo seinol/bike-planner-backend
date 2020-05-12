@@ -35,18 +35,18 @@ public class GraphQLGreatnameController {
 
                     @Override
                     public Collection<AnnotatedType> getInterfaces(AnnotatedType type) {
-                        Class cls = ClassUtils.getRawType(type.getType());
+                        Class rawType = ClassUtils.getRawType(type.getType());
                         Set<AnnotatedType> interfaces = new HashSet<>();
                         do {
-                            AnnotatedType currentType = GenericTypeReflector.getExactSuperType(type, cls);
+                            AnnotatedType currentType = GenericTypeReflector.getExactSuperType(type, rawType);
                             if (supports(currentType)) {
                                 interfaces.add(currentType);
                             }
-                            Arrays.stream(cls.getInterfaces())
+                            Arrays.stream(rawType.getInterfaces())
                                     .map(inter -> GenericTypeReflector.getExactSubType(type, inter))
                                     .filter(this::supports)
                                     .forEach(interfaces::add);
-                        } while ((cls = cls.getSuperclass()) != Object.class && cls != null);
+                        } while ((rawType = rawType.getSuperclass()) != Object.class && rawType != null);
                         return interfaces;
                     }
                 })
