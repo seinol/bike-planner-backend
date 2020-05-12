@@ -1,35 +1,42 @@
 package ch.hsr.greatnamebackend.common.authentication;
 
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public final class GoogleIdentityAuthenticationProvider implements AuthenticationProvider {
 
     private static final Logger LOG = LoggerFactory.getLogger(GoogleIdentityAuthenticationProvider.class);
 
-    private final GoogleIdentityServiceClient googleIdentityServiceClient;
+    private final GoogleIdentityServiceConfig googleIdentityServiceConfig;
 
-    public GoogleIdentityAuthenticationProvider(GoogleIdentityServiceClient googleIdentityServiceClient) {
-        this.googleIdentityServiceClient = googleIdentityServiceClient;
+    public GoogleIdentityAuthenticationProvider(GoogleIdentityServiceConfig googleIdentityServiceConfig) {
+        this.googleIdentityServiceConfig = googleIdentityServiceConfig;
     }
 
+
+    @SneakyThrows
     @Override
     public Authentication authenticate(Authentication authentication) {
         String token = authentication.getCredentials().toString();
 
         LOG.debug("Authentication in Progress");
 
-        //TODO implement authentication here... validate token with google endpoints!!
-        // Is it necessary to do this with userInfo fetching? Find better solution
+        //"https://oauth2.googleapis.com/tokeninfo"
+        URL url = new URL(googleIdentityServiceConfig.getTokenEndpoint() + "?id_token=" + token);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        int status = con.getResponseCode();
+        con.disconnect();
 
-/*        GoogleIdentityToken googleIdentityUserInfo = googleIdentityServiceClient.getUserInfo(token);
-
-        if (googleIdentityUserInfo == null) {
-            throw new BadCredentialsException("Invalid bearer token provided");
-        }*/
+        if (status != 200)
+            throw new BadCredentialsException("Invalid Id_Token provided");
 
         return new GoogleIdentityAuthenticationToken(token);
     }

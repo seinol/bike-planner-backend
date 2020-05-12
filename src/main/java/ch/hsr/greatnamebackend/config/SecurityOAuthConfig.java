@@ -2,7 +2,7 @@ package ch.hsr.greatnamebackend.config;
 
 import ch.hsr.greatnamebackend.common.authentication.BearerTokenParserFilter;
 import ch.hsr.greatnamebackend.common.authentication.GoogleIdentityAuthenticationProvider;
-import ch.hsr.greatnamebackend.common.authentication.GoogleIdentityServiceClient;
+import ch.hsr.greatnamebackend.common.authentication.GoogleIdentityServiceConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -25,9 +25,9 @@ public class SecurityOAuthConfig extends WebSecurityConfigurerAdapter {
 
     private final GoogleIdentityAuthenticationProvider googleIdentityAuthenticationProvider;
 
-    public SecurityOAuthConfig(GoogleIdentityServiceClient googleIdentityServiceClient) {
+    public SecurityOAuthConfig(GoogleIdentityServiceConfig googleIdentityServiceConfig) {
         this.googleIdentityAuthenticationProvider =
-                new GoogleIdentityAuthenticationProvider(googleIdentityServiceClient);
+                new GoogleIdentityAuthenticationProvider(googleIdentityServiceConfig);
     }
 
     @Override
@@ -40,8 +40,8 @@ public class SecurityOAuthConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new BearerTokenParserFilter(), BasicAuthenticationFilter.class)
                 .authorizeRequests()
                 //TODO implement authentication for endpoint
-//                .antMatchers(patternify("/graphql")).authenticated()
-                .antMatchers(patternify("/graphql")).permitAll()
+                .antMatchers(patternify("/graphql")).authenticated()
+                //.antMatchers(patternify("/graphql")).permitAll()
                 .antMatchers(patternify("/graphiql")).permitAll()
                 .anyRequest().authenticated();
     }
