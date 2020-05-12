@@ -34,18 +34,18 @@ public class AnswerService {
     }
 
     @GraphQLMutation(name = "saveAnswers")
-    public List<Answer> saveAnswers(@NotNull @GraphQLArgument(name = "person") Person person,
+    public List<Answer> saveAnswers(@NotNull @GraphQLArgument(name = "person") Person providedPerson,
                                     @NotNull @GraphQLArgument(name = "answers") List<AnswerInput> answers) {
-        Person tmpPerson = person;
-        if (tmpPerson.getId() == null)
-            tmpPerson = personService.savePerson(person);
+        Person person = providedPerson;
+        if (person.getId() == null)
+            person = personService.savePerson(providedPerson);
 
         List<Answer> entities = new ArrayList<>();
         for (AnswerInput input : answers) {
             Optional<SurveyElement> surveyElement = surveyElementService.getSurveyElementById(input.getSurveyElementId());
             Optional<Survey> survey = surveyService.getSurveyById(input.getSurveyId());
             Answer answer = new Answer();
-            answer.setPerson(tmpPerson);
+            answer.setPerson(person);
             surveyElement.ifPresent(answer::setSurveyElement);
             survey.ifPresent(answer::setSurvey);
             answer.setSelectedAnswer(AnswerPossibility.valueOf(input.getSelectedAnswer()));
